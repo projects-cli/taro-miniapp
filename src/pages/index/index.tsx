@@ -1,24 +1,38 @@
-import React, { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import React, { useEffect } from 'react'
+import { navigateTo } from '@tarojs/taro'
+import { View, Text, Button } from '@tarojs/components'
+import { useSelector, useDispatch } from 'react-redux'
+
 import './index.scss'
 
-export default class Index extends Component {
+const Index = (props) => {
+  const state = useSelector(state => state)
+  const dispatch = useDispatch()
 
-  componentWillMount () { }
+  console.log(14, state)
 
-  componentDidMount () { }
+  useEffect(() => {
+    console.log(props)
+  }, [])
 
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
-      </View>
-    )
+  const doTest = () => {
+    dispatch({
+      type: 'common/save',
+      payload: {
+        test: 1
+      }
+    })
   }
+
+  return (
+    <View>
+      <Text>Hello world!</Text>
+      <Button onClick={() => navigateTo({
+        url: '/pages/test/index'
+      })}>go to test</Button>
+      <Button onClick={doTest}>dispatch</Button>
+    </View>
+  ) 
 }
+
+export default Index
