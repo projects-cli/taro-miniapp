@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import dva from './utils/dva'
-import models from './models'
+import { dva, regExp } from '@/utils/index'
+import models from '@/models'
 
 import './app.scss'
 
