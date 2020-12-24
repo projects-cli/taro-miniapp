@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { dva, regExp } from '@/utils/index'
+import { dva } from '@/utils/index'
 import models from '@/models'
 
 import './app.scss'

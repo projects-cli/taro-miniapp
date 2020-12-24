@@ -2,18 +2,19 @@ import React, { useEffect } from 'react'
 import { navigateTo } from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
 import { useSelector, useDispatch } from 'react-redux'
+import { AtButton } from 'taro-ui'
 
 import './index.scss'
 
 const Index = (props) => {
-  const state = useSelector(state => state)
+  const state = useSelector(store => store)
   const dispatch = useDispatch()
 
-  console.log(14, state)
+  console.log('index-14: ', state)
 
   useEffect(() => {
-    console.log(props)
-  }, [])
+    console.log('index-16: ', props)
+  })
 
   const doTest = () => {
     dispatch({
@@ -29,10 +30,12 @@ const Index = (props) => {
       <Text>Hello world!</Text>
       <Button onClick={() => navigateTo({
         url: '/pages/test/index'
-      })}>go to test</Button>
+      })}
+      >go to test</Button>
       <Button onClick={doTest}>dispatch</Button>
+      <AtButton type='primary'>按钮文案</AtButton>
     </View>
-  ) 
+  )
 }
 
 export default Index

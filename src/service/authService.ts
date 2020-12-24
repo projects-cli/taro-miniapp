@@ -11,7 +11,6 @@ export class AuthService {
     const wxLoginRes = await this.wxLogin();
     const wxUserInfo = await this.wxGetUserInfo();
 
-    console.log(14, wxLoginRes, wxUserInfo)
     return {
       wxLoginRes,
       wxUserInfo

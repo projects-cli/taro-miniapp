@@ -54,8 +54,6 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
-    // 由于引用 `node_modules` 的模块，默认不会编译，所以需要额外给 H5 配置 `esnextModules`，在 taro 项目的 `config/index.js` 中新增如下配置项：
-    esnextModules: ['taro-ui'],
     postcss: {
       autoprefixer: {
         enable: true,
