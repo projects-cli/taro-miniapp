@@ -7,16 +7,16 @@ import { AtButton } from 'taro-ui'
 import './index.scss'
 
 const Index = (props) => {
-  const state = useSelector(store => store)
   const dispatch = useDispatch()
+  // const state = useSelector(store => store)
 
-  console.log('index-14: ', state)
+  // console.log('index-14: ', state)
 
-  useEffect(() => {
-    console.log('index-16: ', props)
-  })
+  // useEffect(() => {
+  //   console.log('index-16: ', props)
+  // })
 
-  const doTest = () => {
+  const doTestReducer = () => {
     dispatch({
       type: 'common/save',
       payload: {
@@ -25,15 +25,28 @@ const Index = (props) => {
     })
   }
 
+  const doLogin = () => {
+    dispatch({
+      type: 'auth/login'
+    })
+  }
+
+  const doTest = () => {
+    dispatch({
+      type: 'common/test'
+    })
+  }
+
   return (
     <View>
       <Text>Hello world!</Text>
-      <Button onClick={() => navigateTo({
+      {/* <Button onClick={() => navigateTo({
         url: '/pages/test/index'
       })}
       >go to test</Button>
-      <Button onClick={doTest}>dispatch</Button>
-      <AtButton type='primary'>按钮文案</AtButton>
+      <Button onClick={doTestReducer}>dispatch</Button>
+      <AtButton type='primary' onClick={doTest}>按钮文案</AtButton> */}
+      <AtButton type='primary' onClick={doLogin}>login</AtButton>
     </View>
   )
 }

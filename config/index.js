@@ -28,6 +28,7 @@ const config = {
     '@/service': path.resolve(__dirname, '..', 'src/service'),
     '@/package': path.resolve(__dirname, '..', 'package.json'),
   },
+  outputRoot: `dist/${process.env.TARO_ENV}`,
   mini: {
     postcss: {
       pxtransform: {

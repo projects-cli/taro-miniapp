@@ -11,9 +11,9 @@ function createApp(opt) {
   // redux日志
   // opt.onAction = [createLogger()];
   opt.onError = (err) => {
-    console.error(err);
-    Taro.hideLoading();
-    Taro.showToast({ title: '服务器错误', /*image: sadImg*/ });
+    console.error('dva: ', err);
+    // Taro.hideLoading();
+    // Taro.showToast({ title: '服务器错误', /*image: sadImg*/ });
   };
   app = create(opt);
   app.use(createLoading({}));
@@ -29,6 +29,9 @@ function createApp(opt) {
 
   store = app._store;
   app.getStore = () => store;
+
+  // 将store挂在在global下方便在effects中调用
+  global.store = store
 
   dispatch = store.dispatch;
 
