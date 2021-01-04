@@ -5,6 +5,7 @@ import { RetryLink } from '@apollo/client/link/retry';
 import ApolloLinkTimeout from 'apollo-link-timeout';
 import fetch from 'cross-fetch';
 import Taro, { ENV_TYPE } from '@tarojs/taro';
+import { prop } from 'ramda'
 
 const WxFetch = (url, { body: data, ...fetchOptions }) => {
   // Taro.request默认会对res做JSON.parse，但apollo-http-link需要text，也要做一次JSON.parse
@@ -70,7 +71,7 @@ const errorLink = onError(({ graphQLErrors, networkError, response, operation }:
   }
 
   if (networkError) {
-    Taro.showToast({ title: '无网络', icon: 'none' })
+    Taro.showToast({ title: prop('message', networkError) || JSON.stringify(networkError) || '服务器错误', icon: 'none' })
   }
 });
 
@@ -89,9 +90,15 @@ const retryLink = new RetryLink({
   },
   attempts: {
     max: 3,
-    retryIf: (error, operation) => {
-      const doNotRetryCodes = [500, 400];
-      return !!error && !doNotRetryCodes.includes(error.statusCode);
+    retryIf: (error) => {
+      // const doNotRetryCodes = [500, 400];
+      // return !!error && !doNotRetryCodes.includes(error.statusCode);
+      
+      /**
+       * 408 请求超时
+       * 只有请求超时才会重新请求
+       */
+      return prop('statusCode', error) === 408
     }
   }
 })
