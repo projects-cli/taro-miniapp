@@ -1,36 +1,33 @@
-import { Model } from 'dva-core';
-import { Reducer } from 'redux';
+import { Model } from 'dva-core'
+import { Effect } from 'dva'
+import { Reducer } from 'redux'
 import { authService } from '@/service'
 
 export interface StateType {
-	accountState: string;
+  accountState: string;
 }
 
 interface ModelType {
-	namespace: string;
-	state: StateType;
-	effects: {};
-	reducers: {
-		save: Reducer;
-	};
+  namespace: string;
+  state: StateType;
+  effects: Effect;
+  reducers: {
+    save: Reducer;
+  };
 }
 
 const AuthModel: Model & ModelType = {
-	namespace: 'auth',
-	state: {
+  namespace: 'auth',
+  state: {},
 
-	},
-
-	effects: {
-		*login(_, {call}) {
+  effects: {
+    * login (_, { call }) {
       const res = yield call(authService.testGqlLogin)
       console.log(27, res)
-		}
-	},
+    }
+  },
 
-	reducers: {
-
-	}
+  reducers: {}
 }
 
 export default AuthModel

@@ -1,17 +1,17 @@
-import { ApolloClient, InMemoryCache, from, ApolloLink, Operation, NextLink } from '@apollo/client';
-import { onError, ErrorResponse } from "@apollo/client/link/error";
+import { ApolloClient, InMemoryCache, from, ApolloLink, Operation, NextLink } from '@apollo/client'
+import { onError, ErrorResponse } from '@apollo/client/link/error'
 import { BatchHttpLink } from '@apollo/client/link/batch-http'
-import { RetryLink } from '@apollo/client/link/retry';
-import ApolloLinkTimeout from 'apollo-link-timeout';
-import fetch from 'cross-fetch';
-import Taro, { ENV_TYPE } from '@tarojs/taro';
+import { RetryLink } from '@apollo/client/link/retry'
+import ApolloLinkTimeout from 'apollo-link-timeout'
+import fetch from 'cross-fetch'
+import Taro, { ENV_TYPE } from '@tarojs/taro'
 import { prop } from 'ramda'
 
 const WxFetch = (url, { body: data, ...fetchOptions }) => {
   // Taro.request默认会对res做JSON.parse，但apollo-http-link需要text，也要做一次JSON.parse
   // 所以要让微信返回text,需做如下配置：dataType: 'txt', responseType: 'text'
-  // dataType	String	否	json	如果设为json，会尝试对返回的数据做一次 JSON.parse
-  // responseType	String	否	text	设置响应的数据类型。合法值：text、arraybuffer
+  // dataType String否json如果设为json，会尝试对返回的数据做一次 JSON.parse
+  // responseType String否text设置响应的数据类型。合法值：text、arraybuffer
 
   return Taro.request({
     url,
@@ -21,7 +21,7 @@ const WxFetch = (url, { body: data, ...fetchOptions }) => {
     responseType: 'text'
   }).then((response) => ({
     text: () => Promise.resolve(response.data)
-	}))
+  }))
 }
 
 const uri = 'http://127.0.0.1:1111/graphql'
@@ -32,11 +32,14 @@ const authLink = new ApolloLink((operation: Operation, forward: NextLink) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      authorization: Taro.getEnv() === ENV_TYPE.WEB ? localStorage.getItem('token') : Taro.getStorageSync('token') || null,
+      authorization:
+        Taro.getEnv() === ENV_TYPE.WEB
+          ? localStorage.getItem('token')
+          : Taro.getStorageSync('token') || null
     }
-  }));
+  }))
 
-  return forward(operation);
+  return forward(operation)
 })
 
 // 错误处理
@@ -54,31 +57,32 @@ const errorLink = onError(({ graphQLErrors, networkError, response, operation }:
    * 此方案在请求时通过context传递参数即可，更加灵活，例如：
    * client.query({ query: TEST, context: { isIgnoreErrors: true }});
    */
-  const { isIgnoreErrors } = operation.getContext();
+  const { isIgnoreErrors } = operation.getContext()
   if (isIgnoreErrors) {
-    response.errors = null;
+    response.errors = null
   }
 
   if (graphQLErrors && !isIgnoreErrors) {
     const msg: string[] = []
-    graphQLErrors.map(({ message, locations, path }) => {
+    graphQLErrors.forEach(({ message, locations, path }) => {
       msg.push(message)
-      console.error(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      )
-    });
-    Taro.showToast({ title: msg.join(',') || '服务器错误', icon: 'none'});
+      console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+    })
+    Taro.showToast({ title: msg.join(',') || '服务器错误', icon: 'none' })
   }
 
   if (networkError) {
-    Taro.showToast({ title: prop('message', networkError) || JSON.stringify(networkError) || '服务器错误', icon: 'none' })
+    Taro.showToast({
+      title: prop('message', networkError) || JSON.stringify(networkError) || '服务器错误',
+      icon: 'none'
+    })
   }
-});
+})
 
 // 替代 link-http 多个request自动打包发送
 const httpLink = new BatchHttpLink({
   uri, // 配置请求url
-  fetch: Taro.getEnv() === ENV_TYPE.WEB ? fetch : WxFetch,
+  fetch: Taro.getEnv() === ENV_TYPE.WEB ? fetch : WxFetch
 })
 
 // 重试
@@ -86,14 +90,14 @@ const retryLink = new RetryLink({
   delay: {
     initial: 100,
     max: 2000,
-    jitter: true,
+    jitter: true
   },
   attempts: {
     max: 3,
     retryIf: (error) => {
       // const doNotRetryCodes = [500, 400];
       // return !!error && !doNotRetryCodes.includes(error.statusCode);
-      
+
       /**
        * 408 请求超时
        * 只有请求超时才会重新请求
@@ -104,17 +108,17 @@ const retryLink = new RetryLink({
 })
 
 // 超时
-const timeoutLink = new ApolloLinkTimeout(10000); // 10s
+const timeoutLink = new ApolloLinkTimeout(10000) // 10s
 
 // 日志
 const loggerLink = new ApolloLink((operation, forward) => {
-  operation.setContext({ start: new Date() });
+  operation.setContext({ start: new Date().getTime() })
   return forward(operation).map((response) => {
-    const responseTime = new Date() - operation.getContext().start;
-    console.log(`${operation.operationName} 请求耗时: ${responseTime}`);
-    return response;
-  });
-});
+    const responseTime = new Date().getTime() - operation.getContext().start
+    console.log(`${operation.operationName} 请求耗时: ${responseTime}`)
+    return response
+  })
+})
 
 // // 修改响应数据
 // const addDateLink = new ApolloLink((operation: Operation, forward: NextLink) => {
@@ -133,7 +137,7 @@ const loggerLink = new ApolloLink((operation, forward) => {
  */
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: from([retryLink, loggerLink, timeoutLink, authLink, errorLink, httpLink ]),
+  link: from([retryLink, loggerLink, timeoutLink, authLink, errorLink, httpLink]),
   defaultOptions: {
     watchQuery: {
       fetchPolicy: 'cache-and-network',
@@ -146,7 +150,7 @@ const client = new ApolloClient({
     mutate: {
       errorPolicy: 'all'
     }
-	},
-});
+  }
+})
 
 export default client

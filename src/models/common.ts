@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro';
+import Taro from '@tarojs/taro'
 
 export default {
   namespace: 'common',
@@ -8,17 +8,17 @@ export default {
   },
 
   effects: {
-    *test() {
+    * test () {
       console.log('start')
-      setTimeout(() => {
+      yield setTimeout(() => {
         console.log(12)
       })
     }
   },
 
   reducers: {
-    save(state, { payload }) {
-      return { ...state, ...payload };
+    save (state, { payload }) {
+      return { ...state, ...payload }
     }
   }
-};
+}

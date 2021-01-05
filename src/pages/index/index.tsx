@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { navigateTo } from '@tarojs/taro'
-import { View, Text, Button } from '@tarojs/components'
-import { useSelector, useDispatch } from 'react-redux'
+import { View, Text } from '@tarojs/components'
+import { useDispatch } from 'react-redux'
 import { AtButton } from 'taro-ui'
 
 import './index.scss'
@@ -16,14 +16,14 @@ const Index = (props) => {
   //   console.log('index-16: ', props)
   // })
 
-  const doTestReducer = () => {
-    dispatch({
-      type: 'common/save',
-      payload: {
-        test: 1
-      }
-    })
-  }
+  // const doTestReducer = () => {
+  //   dispatch({
+  //     type: 'common/save',
+  //     payload: {
+  //       test: 1
+  //     }
+  //   })
+  // }
 
   const doLogin = () => {
     dispatch({
@@ -31,11 +31,11 @@ const Index = (props) => {
     })
   }
 
-  const doTest = () => {
-    dispatch({
-      type: 'common/test'
-    })
-  }
+  // const doTest = () => {
+  //   dispatch({
+  //     type: 'common/test'
+  //   })
+  // }
 
   return (
     <View>
@@ -46,7 +46,9 @@ const Index = (props) => {
       >go to test</Button>
       <Button onClick={doTestReducer}>dispatch</Button>
       <AtButton type='primary' onClick={doTest}>按钮文案</AtButton> */}
-      <AtButton type='primary' onClick={doLogin}>login</AtButton>
+      <AtButton type='primary' onClick={doLogin}>
+        login
+      </AtButton>
     </View>
   )
 }

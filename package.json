@@ -27,7 +27,13 @@
     "dev:rn": "npm run build:rn -- --watch",
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
-    "dev:quickapp": "npm run build:quickapp -- --watch"
+    "dev:quickapp": "npm run build:quickapp -- --watch",
+    "lint": "eslint src --fix",
+    "prettier": "prettier src --write",
+    "format": "npm run prettier && npm run lint",
+    "standard": "standard --fix",
+    "commit": "git-cz",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "browserslist": [
     "last 3 versions",
@@ -46,7 +52,9 @@
     "cross-fetch": "^3.0.6",
     "dva-core": "^2.0.4",
     "dva-loading": "^3.0.22",
+    "eslint-config-prettier": "^7.1.0",
     "graphql": "^15.4.0",
+    "prettier": "^2.2.1",
     "ramda": "^0.27.1",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
@@ -58,20 +66,59 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@tarojs/mini-runner": "3.1.0-beta.4",
     "@tarojs/webpack-runner": "3.1.0-beta.4",
     "@types/react": "^16.0.0",
     "@types/webpack-env": "^1.13.6",
-    "@typescript-eslint/eslint-plugin": "^2.x",
-    "@typescript-eslint/parser": "^2.x",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "babel-eslint": "^10.1.0",
     "babel-preset-taro": "3.1.0-beta.4",
+    "commitizen": "^4.2.2",
+    "commitlint-config-cz": "^0.13.2",
+    "conventional-changelog-cli": "^2.1.1",
+    "cz-customizable": "^6.3.0",
     "dva": "^2.4.1",
-    "eslint": "^6.8.0",
+    "eslint": "^7.17.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard-jsx": "^10.0.0",
     "eslint-config-taro": "3.1.0-beta.4",
     "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^1.6.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "husky": "^4.3.6",
+    "lint-staged": "^10.5.3",
+    "standard": "^16.0.3",
     "stylelint": "9.3.0",
     "typescript": "^3.7.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/yepine/miniapp/issues"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "localStorage"
+    ]
   }
 }

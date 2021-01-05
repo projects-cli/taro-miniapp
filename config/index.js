@@ -10,7 +10,7 @@ const config = {
     828: 1.81 / 2
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: `dist/${process.env.TARO_ENV}`,
   plugins: [],
   defineConstants: {
   },
@@ -26,9 +26,8 @@ const config = {
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
     '@/models': path.resolve(__dirname, '..', 'src/models'),
     '@/service': path.resolve(__dirname, '..', 'src/service'),
-    '@/package': path.resolve(__dirname, '..', 'package.json'),
+    '@/package': path.resolve(__dirname, '..', 'package.json')
   },
-  outputRoot: `dist/${process.env.TARO_ENV}`,
   mini: {
     postcss: {
       pxtransform: {

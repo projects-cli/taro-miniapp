@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { View, Text } from '@tarojs/components'
 
 // interface Props {
@@ -6,12 +6,12 @@ import { View, Text } from '@tarojs/components'
 // }
 
 const Index = (props) => {
-	console.log('test props: ', props)
+  console.log('test props: ', props)
   return (
     <View>
       <Text>Hello test!!!!</Text>
     </View>
-  ) 
+  )
 }
 
 export default Index

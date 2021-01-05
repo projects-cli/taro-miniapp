@@ -1,29 +1,29 @@
-import Taro from '@tarojs/taro';
+import Taro from '@tarojs/taro'
 import { client } from '@/utils'
-import { LOGIN } from '@/utils/gql-test'
+import { LOGIN } from 'src/api/auth'
 
-
-export const testGqlLogin = () => client.query({
-  query: LOGIN, 
-  variables: {
-    type: 'phone',
-    phoneNumber: "17620332255",
-    countryCode: "CN",
-    password: "1!qQww"
-  },
-  context: {
-    // isIgnoreErrors: true
-  }
-})
+export const testGqlLogin = (): Promise<any> =>
+  client.query({
+    query: LOGIN,
+    variables: {
+      type: 'phone',
+      phoneNumber: '17620332255',
+      countryCode: 'CN',
+      password: '1!qQww'
+    },
+    context: {
+      // isIgnoreErrors: true
+    }
+  })
 
 /**
  * 整合登录
  */
-export const login = async() => {
-  const isLogin = await checkLogin();
-  if (isLogin) return;
-  const wxLoginRes = await wxLogin();
-  const wxUserInfo = await wxGetUserInfo();
+export const login = async () => {
+  const isLogin = await checkLogin()
+  if (isLogin) return
+  const wxLoginRes = await wxLogin()
+  const wxUserInfo = await wxGetUserInfo()
 
   return {
     wxLoginRes,
@@ -51,14 +51,14 @@ export const login = async() => {
  * 微信登录
  */
 export const wxLogin = () => {
-  return Taro.login();
+  return Taro.login()
 }
 
 /**
  * 检查是否登录
  */
 export const checkLogin = () => {
-  return Taro.getStorageSync('token');
+  return Taro.getStorageSync('token')
 }
 
 /**
@@ -68,5 +68,5 @@ export const wxGetUserInfo = () => {
   return Taro.getUserInfo({
     lang: 'zh_CN',
     withCredentials: true
-  });
+  })
 }

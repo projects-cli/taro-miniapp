@@ -15,10 +15,8 @@ import { gql } from '@apollo/client'
   })
  */
 export const LOGIN_INPUT = gql`
-  query login ($loginInput: LoginInput) {
-    login(
-      loginInput: $loginInput
-    ) {
+  query login($loginInput: LoginInput) {
+    login(loginInput: $loginInput) {
       token
     }
   }
@@ -27,7 +25,7 @@ export const LOGIN_INPUT = gql`
 /**
  * 调用方式二
  client.query({
-    query: LOGIN, 
+    query: LOGIN,
     variables: {
       type: 'phone',
       phoneNumber: "17620332255",
@@ -37,13 +35,18 @@ export const LOGIN_INPUT = gql`
   })
  */
 export const LOGIN = gql`
-  query login ($type: AccountType!, $password: String!, $phoneNumber: String, $countryCode: CountryCode) {
+  query login(
+    $type: AccountType!
+    $password: String!
+    $phoneNumber: String
+    $countryCode: CountryCode
+  ) {
     login(
       loginInput: {
-        type: $type,
-        phoneNumber: $phoneNumber,
-        countryCode: $countryCode,
-        password: $password,
+        type: $type
+        phoneNumber: $phoneNumber
+        countryCode: $countryCode
+        password: $password
       }
     ) {
       token

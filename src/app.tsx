@@ -13,10 +13,11 @@ import './app.scss'
 const dvaApp = dva.createApp({
   initialState: {},
   models
-});
-const store = dvaApp.getStore();
+})
+const store = dvaApp.getStore()
 
-const App = ({children}) => {
+// eslint-disable-next-line react/prop-types
+const App = ({ children }) => {
   return <Provider store={store}>{children}</Provider>
 }
 
