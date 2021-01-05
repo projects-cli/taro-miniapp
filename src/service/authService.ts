@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { client } from '@/utils'
-import { LOGIN } from 'src/api/auth'
+import { LOGIN } from '@/api/auth'
 
 export const testGqlLogin = (): Promise<any> =>
   client.query({

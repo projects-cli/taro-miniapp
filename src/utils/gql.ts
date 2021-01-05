@@ -73,7 +73,7 @@ const errorLink = onError(({ graphQLErrors, networkError, response, operation }:
 
   if (networkError) {
     Taro.showToast({
-      title: prop('message', networkError) || JSON.stringify(networkError) || '服务器错误',
+      title: prop('message', networkError) || prop('errMsg', networkError) || JSON.stringify(networkError) || '服务器错误',
       icon: 'none'
     })
   }
