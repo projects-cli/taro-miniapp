@@ -1,5 +1,11 @@
+import { useGlobalIconFont } from './components/Iconfont/helper'
+
 export default {
-  pages: ['pages/index/index', 'pages/test/index'],
+  usingComponents: Object.assign(useGlobalIconFont()),
+  pages: [
+    'pages/test/index',
+    'pages/index/index'
+  ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
