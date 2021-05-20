@@ -1,34 +1,24 @@
 import { Model } from 'dva-core'
-import { Reducer } from 'redux'
-import { Effect } from 'dva'
 
 export interface StateType {
-  isOffline: boolean;
+  tabIndex: number;
 }
 
-interface ModelType {
-  namespace: string;
-  state: StateType;
-  effects: Effect;
-  reducers: {
-    changeOfflineStatus: Reducer;
-  };
+interface ModelApp {
+  state: StateType
 }
 
-const AppModel: Model & ModelType = {
+const AppModel: Model & ModelApp = {
   namespace: 'app',
   state: {
-    isOffline: false
+    tabIndex: 0
   },
 
   effects: {},
 
   reducers: {
-    changeOfflineStatus (state, { payload: { isOffline } }) {
-      return {
-        ...state,
-        isOffline
-      }
+    changeIndex (state, { payload }) {
+      return { ...state, ...payload }
     }
   }
 }

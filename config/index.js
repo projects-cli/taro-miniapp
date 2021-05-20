@@ -24,12 +24,17 @@ const config = {
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/api': path.resolve(__dirname, '..', 'src/api'),
+    '@/static': path.resolve(__dirname, '..', 'src/static'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
     '@/models': path.resolve(__dirname, '..', 'src/models'),
     '@/service': path.resolve(__dirname, '..', 'src/service'),
+    '@/styles': path.resolve(__dirname, '..', 'src/styles'),
     '@/package': path.resolve(__dirname, '..', 'package.json')
   },
   mini: {
+    imageUrlLoaderOption: {
+      limit: 500 // 可以按需调小，设置该值解决coverimage不显示图片bug，coverimage不支持base64，设小防止图片转为base64
+    },
     postcss: {
       pxtransform: {
         enable: true,

@@ -31,6 +31,8 @@
       "@/utils/*": ["./src/utils/*"],
       "@/models/*": ["./src/models/*"],
       "@/service/*": ["./src/service/*"],
+      "@/static/*": ["./src/static/*"],
+      "@/styles/*": ["./src/styles/*"],
       "@/package/*": ["./package.json/*"],
 
       // 此方式有且默认只能访问文件夹下的index文件，因此所有文件都必须导入到index文件下
@@ -39,6 +41,8 @@
       "@/utils": ["./src/utils"],
       "@/models": ["./src/models"],
       "@/service": ["./src/service"],
+      "@/static": ["./src/static"],
+      "@/styles": ["./src/styles"],
       "@/package": ["./package.json"],
     }
   },

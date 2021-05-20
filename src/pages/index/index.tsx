@@ -4,8 +4,6 @@ import { View, Text } from '@tarojs/components'
 import { useDispatch } from 'react-redux'
 import { AtButton } from 'taro-ui'
 
-import './index.scss'
-
 const Index = (props) => {
   const dispatch = useDispatch()
   // const state = useSelector(store => store)

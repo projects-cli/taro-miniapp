@@ -6,6 +6,7 @@ import ApolloLinkTimeout from 'apollo-link-timeout'
 import fetch from 'cross-fetch'
 import Taro, { ENV_TYPE } from '@tarojs/taro'
 import { prop } from 'ramda'
+import { api } from './config'
 
 const WxFetch = (url, { body: data, ...fetchOptions }) => {
   // Taro.request默认会对res做JSON.parse，但apollo-http-link需要text，也要做一次JSON.parse
@@ -23,8 +24,6 @@ const WxFetch = (url, { body: data, ...fetchOptions }) => {
     text: () => Promise.resolve(response.data)
   }))
 }
-
-const uri = 'http://127.0.0.1:1111/graphql'
 
 // 鉴权
 const authLink = new ApolloLink((operation: Operation, forward: NextLink) => {
@@ -73,7 +72,11 @@ const errorLink = onError(({ graphQLErrors, networkError, response, operation }:
 
   if (networkError) {
     Taro.showToast({
-      title: prop('message', networkError) || prop('errMsg', networkError) || JSON.stringify(networkError) || '服务器错误',
+      title:
+        prop('message', networkError) ||
+        prop('errMsg', networkError) ||
+        JSON.stringify(networkError) ||
+        '服务器错误',
       icon: 'none'
     })
   }
@@ -81,7 +84,7 @@ const errorLink = onError(({ graphQLErrors, networkError, response, operation }:
 
 // 替代 link-http 多个request自动打包发送
 const httpLink = new BatchHttpLink({
-  uri, // 配置请求url
+  uri: api.GQL, // 配置请求url
   fetch: Taro.getEnv() === ENV_TYPE.WEB ? fetch : WxFetch
 })
 
