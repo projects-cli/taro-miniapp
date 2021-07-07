@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigateTo } from '@tarojs/taro'
 import { ScrollView, View } from '@tarojs/components'
 import classNames from 'classnames/bind'
 
@@ -12,12 +13,8 @@ const Home:React.FC = () => {
     <View className={cx('page', 'home-page')}>
       <NavBar />
       <ScrollView scrollY className={cx('container', 'home-container')}>
-        <View style={{ fontSize: 120 }}>Home1</View>
-        <View style={{ fontSize: 120 }}>Home2</View>
-        <View style={{ fontSize: 120 }}>Home3</View>
-        <View style={{ fontSize: 120 }}>Home4</View>
-        <View style={{ fontSize: 120 }}>Home5</View>
-        <View style={{ fontSize: 120 }}>Home6</View>
+        <View>current home</View>
+        <View style={{ fontSize: 20 }} onClick={() => navigateTo({ url: '/pages/other/index' })}>go to other</View>
       </ScrollView>
     </View>
   )

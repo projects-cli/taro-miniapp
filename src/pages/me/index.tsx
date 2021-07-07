@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollView, View } from '@tarojs/components'
 import classNames from 'classnames/bind'
+import { navigateTo } from '@tarojs/taro'
 
 import NavBar from '@/components/NavBar'
 import styles from './index.modules.scss'
@@ -12,12 +13,8 @@ const Me:React.FC = () => {
     <View className={cx('page', 'me-page')}>
       <NavBar />
       <ScrollView scrollY className={cx('container', 'me-container')}>
-        <View style={{ fontSize: 120 }}>Me1</View>
-        <View style={{ fontSize: 120 }}>Me2</View>
-        <View style={{ fontSize: 120 }}>Me3</View>
-        <View style={{ fontSize: 120 }}>Me4</View>
-        <View style={{ fontSize: 120 }}>Me5</View>
-        <View style={{ fontSize: 120 }}>Me6</View>
+        <View>current me</View>
+        <View style={{ fontSize: 20 }} onClick={() => navigateTo({ url: '/pages/other/index' })}>go to other</View>
       </ScrollView>
     </View>
   )

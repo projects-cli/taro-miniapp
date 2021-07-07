@@ -1,20 +1,4 @@
 import Taro from '@tarojs/taro'
-import { client } from '@/utils'
-import { LOGIN } from '@/api/auth'
-
-export const testGqlLogin = (): Promise<any> =>
-  client.query({
-    query: LOGIN,
-    variables: {
-      type: 'phone',
-      phoneNumber: '17620332255',
-      countryCode: 'CN',
-      password: '1!qQww'
-    },
-    context: {
-      // isIgnoreErrors: true
-    }
-  })
 
 /**
  * 整合登录

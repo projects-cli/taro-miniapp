@@ -1,6 +1,6 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "miniapp",
+  "projectname": "major",
   "description": "野菠萝小程序、h5",
   "appid": "touristappid",
   "setting": {

@@ -1,13 +1,9 @@
-import { useGlobalIconFont } from './components/Iconfont/helper'
-
 export default {
-  usingComponents: Object.assign(useGlobalIconFont()),
   pages: [
     'pages/home/index',
-    'pages/me/index',
     'pages/other/index',
-    'pages/test/index',
-    'pages/index/index'
+    'pages/index/index',
+    'pages/me/index'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -30,10 +26,6 @@ export default {
       {
         pagePath: 'pages/me/index',
         text: '我的'
-      },
-      {
-        pagePath: 'pages/other/index',
-        text: '其它'
       }
     ]
   }

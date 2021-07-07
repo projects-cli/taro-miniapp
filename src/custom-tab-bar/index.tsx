@@ -1,8 +1,8 @@
 import React from 'react'
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import { useSelector, useDispatch } from 'react-redux'
 import classNames from 'classnames/bind'
+import storage from 'taro-storage'
 
 import home from '@/static/images/tabbar/home.svg'
 import homeSelected from '@/static/images/tabbar/home-selected.svg'
@@ -18,12 +18,6 @@ const list = [
     selectedIconPath: homeSelected
   },
   {
-    pagePath: '/pages/other/index',
-    text: '其它',
-    iconPath: home,
-    selectedIconPath: homeSelected
-  },
-  {
     pagePath: '/pages/me/index',
     text: '我的',
     iconPath: home,
@@ -32,19 +26,14 @@ const list = [
 ]
 
 const TabBar: React.FC = () => {
-  const dispatchDva = useDispatch()
-  const tabIndex = useSelector(state => state.app.tabIndex)
+  const tabIndex = storage.getSessionStorage('tabIndex') || 0
 
   const switchTab = (item, index) => {
+    storage.setSessionStorage('tabIndex', index)
     const url = item.pagePath
-    dispatchDva({
-      type: 'app/changeIndex',
-      payload: {
-        tabIndex: index
-      }
-    })
     Taro.switchTab({ url })
   }
+
   return (
     <View className={cx('tab-bar')}>
       <View className={cx('tab-bar-border')} />
