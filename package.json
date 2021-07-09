@@ -52,6 +52,8 @@
     "ramda": "^0.27.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.18.1",
+    "taro-axios": "^1.1.1",
     "taro-storage": "^1.0.4",
     "use-immer": "^0.6.0"
   },
@@ -63,6 +65,7 @@
     "@tarojs/webpack-runner": "^3.2.14",
     "@types/ramda": "^0.27.42",
     "@types/react": "^17.0.13",
+    "@types/react-query": "^1.2.9",
     "@types/webpack-env": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
