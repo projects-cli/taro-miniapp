@@ -75,7 +75,7 @@ instance.interceptors.response.use((response: AxiosResponse) => {
 
   if (response.data.code !== 0) {
     showToast({
-      title: response.data.message,
+      title: response.data.message || '该接口没有以code=0作为成功的标识，请注意调整axios封装',
       icon: 'none'
     })
   }
