@@ -1,8 +1,13 @@
-import React from 'react'
-import { navigateTo } from '@tarojs/taro'
+import React, { useEffect } from 'react'
+import { switchTab } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 
-const Index = (props) => {
+const Index = () => {
+  useEffect(() => {
+    switchTab({
+      url: '/pages/home/index'
+    })
+  }, [])
   // const doTest = () => {
   //   dispatch({
   //     type: 'common/test'

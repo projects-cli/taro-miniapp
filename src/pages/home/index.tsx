@@ -25,11 +25,13 @@ const Home:React.FC = () => {
   }
   const { status, data, error, isFetching } = usePosts()
   console.log(23333, status, data, error, isFetching)
+
   return (
     <View className={cx('page', 'home-page')}>
       <NavBar />
       <ScrollView scrollY className={cx('container', 'home-container')}>
         <View>current home</View>
+        <Button onClick={() => { navigateTo({ url: '/subPackages/debug/debug/index' }) }}>debug</Button>
         <Button onClick={getData}>请求</Button>
         <View>
           {

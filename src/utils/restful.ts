@@ -1,17 +1,16 @@
 import { showToast, showLoading, hideLoading, redirectTo, getCurrentPages } from '@tarojs/taro'
 import { axios, PostData, FileData, Canceler, AxiosRequestConfig, AxiosResponse } from 'taro-axios'
-import { merge, last, prop, is, contains, path } from 'ramda'
+import { merge, last, prop, is, contains } from 'ramda'
 import storage from 'taro-storage'
 import qs from 'qs'
 import md5 from 'md5'
 
-import { api } from './config'
+import { getApi, env } from './config'
 
 const CancelToken = axios.CancelToken
 const pending: Map<string, Canceler> = new Map()
-
 const instance = axios.create({
-  baseURL: api,
+  baseURL: getApi(),
   timeout: 1000 * 30
 })
 
@@ -22,6 +21,11 @@ interface RequestConfig extends AxiosRequestConfig {
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 instance.interceptors.request.use((config: RequestConfig) => {
+  const storageEnv = storage.getLocalStorage('env')
+
+  if (env !== 'release' && storageEnv) {
+    config.baseURL = getApi(storageEnv)
+  }
   // console.log('请求前pending', pending)
   console.log('axios-url: ', ` ${config.baseURL}${config.url}`)
   // console.log('请求参数：', `headers: ${is(Object, config.headers) ? JSON.stringify(config.headers) : ''},
@@ -34,13 +38,6 @@ instance.interceptors.request.use((config: RequestConfig) => {
       title: '加载中',
       mask: true
     })
-  }
-
-  // 本项目将memberId作为token使用
-  const memberId = getMemberId()
-  console.log(41111, memberId)
-  if (memberId) {
-    config.data.memberId = memberId
   }
 
   // get请求时将data转为params兼容data
@@ -114,12 +111,6 @@ instance.interceptors.response.use((response: AxiosResponse) => {
 
   return Promise.reject(error)
 })
-
-const getMemberId = () => {
-  const userInfo = storage.getLocalStorage('userInfo')
-  const memberId = path(['data', 'id'], userInfo)
-  return memberId
-}
 
 const retry = (error) => {
   // 全局的请求次数,请求的间隙

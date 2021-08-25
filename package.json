@@ -1,8 +1,8 @@
 {
-  "name": "major",
+  "name": "cli",
   "version": "1.0.0",
   "private": true,
-  "description": "myoffer查专业",
+  "description": "脚手架",
   "templateInfo": {
     "name": "default",
     "typescript": true,
@@ -62,6 +62,7 @@
     "@babel/core": "^7.14.6",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@jdlfe/minidebug-next": "^1.0.1",
     "@tarojs/mini-runner": "^3.2.14",
     "@tarojs/webpack-runner": "^3.2.14",
     "@types/ramda": "^0.27.42",

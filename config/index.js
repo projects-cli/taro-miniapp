@@ -1,7 +1,7 @@
 const path = require('path')
 
 const config = {
-  projectName: 'major',
+  projectName: '脚手架',
   date: '2020-12-17',
   designWidth: 750,
   deviceRatio: {

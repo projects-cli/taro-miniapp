@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "major",
-  "description": "野菠萝小程序、h5",
+  "projectname": "Taro脚手架",
+  "description": "Taro脚手架",
   "appid": "touristappid",
   "setting": {
     "urlCheck": true,

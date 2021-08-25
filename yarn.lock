@@ -1506,6 +1506,13 @@
   resolved "https://registry.nlark.com/@humanwhocodes/object-schema/download/@humanwhocodes/object-schema-1.2.0.tgz?cache=0&sync_timestamp=1625264051240&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40humanwhocodes%2Fobject-schema%2Fdownload%2F%40humanwhocodes%2Fobject-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha1-h956+cIxgm/daKxyWPd8Qp4OX88=
 
+"@jdlfe/minidebug-next@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.nlark.com/@jdlfe/minidebug-next/download/@jdlfe/minidebug-next-1.0.1.tgz#11e20d3259c122f9443464d5c6915a84376b945c"
+  integrity sha1-EeINMlnBIvlENGTVxpFahDdrlFw=
+  dependencies:
+    taro-ui "^3.0.0-alpha.3"
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.npm.taobao.org/@nodelib/fs.scandir/download/@nodelib/fs.scandir-2.1.4.tgz?cache=0&sync_timestamp=1609074618762&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nodelib%2Ffs.scandir%2Fdownload%2F%40nodelib%2Ffs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
@@ -11969,7 +11976,7 @@ taro-storage@^1.0.4:
     babel-preset-env "^1.7.0"
     transform-runtime "^0.0.0"
 
-taro-ui@^3.0.0-alpha.10:
+taro-ui@^3.0.0-alpha.10, taro-ui@^3.0.0-alpha.3:
   version "3.0.0-alpha.10"
   resolved "https://registry.npm.taobao.org/taro-ui/download/taro-ui-3.0.0-alpha.10.tgz#c6fb95ddb70d31c5b1e242cdc25fb11d630339a2"
   integrity sha1-xvuV3bcNMcWx4kLNwl+xHWMDOaI=
